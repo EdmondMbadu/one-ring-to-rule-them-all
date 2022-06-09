@@ -1,7 +1,7 @@
 # one-ring-to-rule-them-all for binary classification
 
 
-##About the Program:
+## About the Program:
 
 We attempt to automate the process of finding which machine learning algorithm performs best given a learning task. To start, we have implemented the gradient descent (with logistic regression), decision tree (ID3), and naıve bayes (Gaussian). We planned to extend the implementation to inlucde more algorithm and multi class classification in the near future. 
 
