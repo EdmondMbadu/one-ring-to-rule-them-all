@@ -45,19 +45,39 @@ elif args.model == 'all':
     X, Y, X_v, Y_v = data.process()
     model = gradient_descent.GradientDescent(X, Y, X_v, Y_v, args.lr, args.epochs)
     precision, recall, fmeasure, accuracy = model.train()
+    gradient = sum([precision, recall, fmeasure, accuracy])
     model.print_results("Gradient Descent (Logistic Regression)", precision, recall, fmeasure, accuracy)
     print("Script running time in seconds: ", round(time.time() - start, 3))
     start = time.time()
     model = naive_bayes.NaiveBayes(X, Y, X_v, Y_v)
     precision, recall, fmeasure, accuracy = model.train()
+    naive = sum([precision, recall, fmeasure, accuracy])
     model.print_results("Naive Bayes", precision, recall, fmeasure, accuracy)
     print("Script running time in seconds: ", round(time.time() - start, 3))
     start = time.time()
     model = decision_trees.DecisionTree(args.data)
     model.process()
     precision, recall, fmeasure, accuracy = model.train()
-    model.print_results("Deciion Tree", precision, recall, fmeasure, accuracy)
+    tree = sum([precision, recall, fmeasure, accuracy])
+    model.print_results("Decision Tree", precision, recall, fmeasure, accuracy)
     print("Script running time in seconds: ", round(time.time() - start, 3))
+
+    if gradient >= naive and gradient >= tree:
+        print("=============================================================================================")
+        print("The Gradient descent algorithm is the most performant one with a summed value of ", round(gradient, 3),
+              "naive with sum", round(naive, 3), " and tree with sum: ", round(tree, 3))
+        print("=============================================================================================")
+    elif naive > gradient and naive > tree:
+        print("=============================================================================================")
+        print("The Naive bayes algorithm is the most performant one with a summed value of ", round(naive, 3),
+              "gradient with sum", round(gradient, 3), " and tree with sum: ", round(tree, 3))
+        print("=============================================================================================")
+    else:
+        print("=============================================================================================")
+        print("The decision tree (ID3) algorithm is the most performant one with a summed value of ", round(tree, 3),
+              "gradient  with sum", round(gradient, 3), " and naive with sum: ", round(naive, 3))
+        print("=============================================================================================")
+
 
 
 else:
